@@ -1,0 +1,82 @@
+package com.company;
+
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static int fileA = -1;
+    public static int fileB = -2;
+    public static int fileC = -3;
+
+    public static void main(String[] args) throws IOException {
+
+        boolean done = false;
+        int choice = 0;
+        Scanner scan = new Scanner(System.in);
+
+        while (!done) {
+            System.out.println("Please choose file:");
+            System.out.println("1: fileA");
+            System.out.println("2: fileB");
+            System.out.println("3: fileC");
+
+            choice = scan.nextInt();
+
+            if (choice == 1 || choice == 2 || choice == 3) {
+                done = true;
+            }
+        }
+        System.out.println();
+
+        switch (choice) {
+            case 1: {
+                choice = fileA;
+                break;
+            }
+            case 2: {
+                choice = fileB;
+                break;
+            }
+            case 3: {
+                choice = fileC;
+                break;
+            }
+        }
+
+        BufferedWriter bw = null;
+        String output = null;
+        File file = null;
+
+        if (choice == fileA) {
+
+            file = new File("fileA.txt");
+            bw = new BufferedWriter(new FileWriter(file));
+            output = "Hello";
+        }
+
+        if (choice == fileB) {
+
+            file = new File("fileB.txt");
+            bw = new BufferedWriter(new FileWriter(file));
+            output = "Goodbye";
+        }
+
+        if (choice == fileC) {
+
+            file = new File("fileC.txt");
+            bw = new BufferedWriter(new FileWriter(file));
+            output = "Whatever";
+        }
+
+        bw.write(output);
+        bw.close();
+
+
+        BufferedReader br = new BufferedReader(new FileReader(file));
+
+        String line = br.readLine();
+
+        System.out.println(line);
+    }
+}
